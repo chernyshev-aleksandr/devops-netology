@@ -2,7 +2,7 @@
 # display command line options
 
 count=1
- param  "$@";
+param "$@";
     echo "Next parameter: $param"
     count=$(( $count + 1 ))
 

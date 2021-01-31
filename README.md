@@ -1,5 +1,2 @@
 # devops-netology
 
-
-
-

@@ -1,6 +1,0 @@
-# devops-netology
-
-# c fix
-
-
-

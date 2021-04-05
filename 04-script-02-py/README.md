@@ -131,3 +131,8 @@ read_file()
 heck_ip()
 write_file()
 ```
+Ответ:
+
+drive.google.com - 142.250.150.194
+mail.google.com - 64.233.162.17
+google.com - 173.194.222.102

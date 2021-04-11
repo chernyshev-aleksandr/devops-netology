@@ -18,15 +18,14 @@
    * указал свой путь и убрал break. Работает
 
 ```python
-
-    #!/usr/bin/env python3
+#!/usr/bin/env python3
  
-    import os
+import os
  
-    bash_command = ["cd /Users/a11/Desktop/devops-netology", "git status"]
-    result_os = os.popen(' && '.join(bash_command)).read()
-    is_change = False
-    for result in result_os.split('\n'):
+bash_command = ["cd /Users/a11/Desktop/devops-netology", "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+is_change = False
+for result in result_os.split('\n'):
     if result.find('modified') != -1:
         prepare_result = result.replace('\tmodified:   ', '')
         print(prepare_result)
@@ -39,40 +38,40 @@
  
 #!/usr/bin/env python3
  
-  import os
-  import sys
+import os
+import sys
  
-  path = '~/devops-netology'
-     if len(sys.argv) == 2:
-     if not os.path.isdir(f'{sys.argv[1]}/.git'):
-     path = sys.argv[1]
-     print(f'{sys.argv[1]} is not git repo')
-   exit()
+path = '~/devops-netology'
+if len(sys.argv) == 2:
+    if not os.path.isdir(f'{sys.argv[1]}/.git'):
+        path = sys.argv[1]
+        print(f'{sys.argv[1]} is not git repo')
+        exit()
  
-   bash_command = [f'cd {path}', "pwd", "git status"]
-   result_os = os.popen(' && '.join(bash_command)).read()
-   is_change = False
-   for i, result in enumerate(result_os.split('\n')):
-   if i == 0:
-   print(f'path {result}')
-   if result.find('modified') != -1:
-   prepare_result = result.replace('#\tmodified:   ', '')
-   print(prepare_result)
+bash_command = [f'cd {path}', "pwd", "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+is_change = False
+for i, result in enumerate(result_os.split('\n')):
+    if i == 0:
+        print(f'path {result}')
+    if result.find('modified') != -1:
+        prepare_result = result.replace('#\tmodified:   ', '')
+        print(prepare_result)
 ```
  
  4.Наша команда разрабатывает несколько веб-сервисов, доступных по http. Мы точно знаем, что на их стенде нет никакой балансировки, кластеризации, за DNS прячется конкретный IP сервера, где установлен сервис. Проблема в том, что отдел, занимающийся нашей инфраструктурой очень часто меняет нам сервера, поэтому IP меняются примерно раз в неделю, при этом сервисы сохраняют за собой DNS имена. Это бы совсем никого не беспокоило, если бы несколько раз сервера не уезжали в такой сегмент сети нашей компании, который недоступен для разработчиков. Мы хотим написать скрипт, который опрашивает веб-сервисы, получает их IP, выводит информацию в стандартный вывод в виде: <URL сервиса> - <его IP>. Также, должна быть реализована возможность проверки текущего IP сервиса c его IP из предыдущей проверки. Если проверка будет провалена - оповестить об этом в стандартный вывод сообщением: [ERROR] <URL сервиса> IP mismatch: <старый IP> <Новый IP>. Будем считать, что наша разработка реализовала сервисы: drive.google.com, mail.google.com, google.com.
         
 ```python
-   #!/usr/bin/env python3
-   import os
-   import socket
+#!/usr/bin/env python3
+import os
+import socket
  
-   filename='services.txt'
-        services = {}
+filename='services.txt'
+services = {}
  
-        def check_file():
-        global services
-        if not os.path.isfile(filename):
+def check_file():
+    global services
+    if not os.path.isfile(filename):
         services = {
             'drive.google.com': None,
             'mail.google.com': None,
@@ -86,6 +85,7 @@ def check_file_ip(line):
     if line[1].strip() == 'None':
         return None
     return line[1].strip()
+
 def read_file():
     check_file()
     with open(filename, 'r') as fn:
@@ -114,7 +114,7 @@ def check_ip():
         host_ip = get_ip(service)
         if not host_ip:
             print(f'[ERROR] {service} no IP')
-    services[service] = None
+            services[service] = None
             continue
         if not ip:
             ip = host_ip
@@ -128,7 +128,7 @@ def check_ip():
  
  
 read_file()
-heck_ip()
+check_ip()
 write_file()
 ```
 Ответ:

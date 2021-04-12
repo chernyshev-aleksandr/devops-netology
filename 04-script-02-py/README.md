@@ -19,16 +19,17 @@
 
 ```python
 #!/usr/bin/env python3
- 
 import os
- 
+
 bash_command = ["cd /Users/a11/Desktop/devops-netology", "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
 is_change = False
-for result in result_os.split('\n'):
-    if result.find('modified') != -1:
-        prepare_result = result.replace('\tmodified:   ', '')
-        print(prepare_result)
+for i, result in enumerate(result_os.split('\n')):
+     if i == 0:
+         print(f'path {result}')
+     if result.find('modified') != -1:
+         prepare_result = result.replace('\tmodified:   ', '')
+         print(prepare_result)
 ```
  
 3. Доработать скрипт выше так, чтобы он мог проверять не только локальный репозиторий в текущей директории, а также умел воспринимать путь к репозиторию, который мы передаём как входной параметр. Мы точно знаем, что начальство коварное и будет проверять работу этого скрипта в директориях, которые не являются локальными репозиториями.
